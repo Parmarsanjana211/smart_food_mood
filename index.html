@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Food Mood - {{ mood|title }}</title>
+    <style>
+        /* Mood Colors Logic */
+        :root {
+            --bg-color: {% if mood == 'angry' %} #ff4757 {% elif mood == 'sad' %} #70a1ff {% elif mood == 'romantic' %} #ff6b81 {% else %} #eccc68 {% endif %};
+            --accent-color: white;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            transition: all 0.8s ease; /* Smooth color change */
+            font-family: 'Arial Rounded MT Bold', sans-serif;
+            margin: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            color: var(--accent-color);
+            text-align: center;
+        }
+
+        .food-display {
+            font-size: 120px;
+            margin: 20px;
+            animation: float 3s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-30px); }
+        }
+
+        .mood-selector {
+            margin-top: 40px;
+            background: rgba(255, 255, 255, 0.2);
+            padding: 20px;
+            border-radius: 50px;
+            backdrop-filter: blur(10px);
+        }
+
+        .mood-btn {
+            text-decoration: none;
+            font-size: 30px;
+            margin: 0 15px;
+            transition: transform 0.3s;
+            display: inline-block;
+        }
+
+        .mood-btn:hover { transform: scale(1.4); }
+
+        h1 { font-size: 3rem; text-shadow: 2px 2px 10px rgba(0,0,0,0.2); }
+    </style>
+</head>
+<body>
+
+    <h1>How are you feeling?</h1>
+    
+    <div class="food-display">
+        {% if mood == 'angry' %}
+            🔥🌶️🍜
+            <p style="font-size: 24px;">Spice it up! Angry Ramen is for you.</p>
+        {% elif mood == 'sad' %}
+            ☕🍝🍦
+            <p style="font-size: 24px;">Comfort Food: Warm Pasta & Coffee.</p>
+        {% elif mood == 'romantic' %}
+            🍫🍰🍷
+            <p style="font-size: 24px;">Sweet Treats for a Sweet Mood.</p>
+        {% else %}
+            🍕🍦🍔
+            <p style="font-size: 24px;">Happy Vibes! Party with Pizza.</p>
+        {% endif %}
+    </div>
+
+    <div class="mood-selector">
+        <a href="?mood=happy" class="mood-btn" title="Happy">😊</a>
+        <a href="?mood=sad" class="mood-btn" title="Sad">😢</a>
+        <a href="?mood=angry" class="mood-btn" title="Angry">😡</a>
+        <a href="?mood=romantic" class="mood-btn" title="Romantic">💖</a>
+    </div>
+
+</body>
+</html>
